@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: white;
+        }
+        .shadow {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <div class="text-3xl font-bold text-gray-800">ZALORE</div>
+            <div class="flex space-x-4">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a class="nav-link" href="checkout.html">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto mt-8 px-6" id="checkout-container">
+        <h2 class="text-2xl font-bold mb-4" id="checkout">Checkout</h2>
+        <div id="checkout-items" class="bg-white rounded-lg shadow-md p-6">
+            <div class="grid grid-cols-1 gap-4" id="checkout-list">
+                <!-- Items will be populated here -->
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-bold" id="total-amount">Total Amount: RP 0.00</h3>
+                <button class="mt-4 w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition" id="place-order-button" disabled>
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCheckoutDisplay() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const checkoutList = document.getElementById('checkout-list');
+            const totalElement = document.getElementById('total-amount'); 
+            const placeOrderButton = document.getElementById('place-order-button');
+
+            // Clear checkout list
+            checkoutList.innerHTML = '';
+            let total = 0;
+            let discounts = 0;
+            let bonusMessage = '';
+
+            // Display items in checkout and calculate total
+            cartItems.forEach(item => {
+                const checkoutItem = document.createElement('div');
+                checkoutItem.className = 'flex justify-between items-center p-2 border-b';
+                const itemTotalPrice = item.price * item.quantity;
+                
+                checkoutItem.innerHTML = `<span>${item.name} (x${item.quantity})</span><span>RP ${itemTotalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>`;
+                checkoutList.appendChild(checkoutItem);
+                total += itemTotalPrice;
+
+                // Apply discount for every 2 shoes of the same type
+                if (item.quantity >= 2) {
+                    discounts += item.price * Math.floor(item.quantity / 2) * 0.1 * item.quantity; // 10% discount for each pair
+                }
+
+                // Add bonus for buying 3 shoes of the same type
+                if (item.quantity >= 3) {
+                    bonusMessage += `Bonus: 1 ${item.name} (no charge)\n`;
+                }
+            });
+
+            // Update total amount
+            total -= discounts; // Subtract discounts
+            totalElement.textContent = `Total Amount: RP ${total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+            if (discounts > 0) {
+                totalElement.textContent += ` (Discount: RP ${discounts.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")})`;
+            }
+            if (bonusMessage) {
+                totalElement.textContent += `\n${bonusMessage}`;
+            }
+
+            placeOrderButton.disabled = cartItems.length === 0;
+        }
+
+        function confirmOrder() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            let message = 'Hello, I would like to purchase the following items:\n\n';
+            cartItems.forEach(item => {
+                const itemTotalPrice = item.price * item.quantity;
+                message += `${item.name} (x${item.quantity}): RP ${itemTotalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}\n`;
+            });
+            const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\nTotal: RP ${total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+
+            // Example WhatsApp number
+            const phoneNumber = '6287824695123'; // Replace with your WhatsApp number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            console.log(whatsappUrl); // Debugging: View URL in console
+            window.open(whatsappUrl, '_blank');
+
+            // Clear cart after order
+            localStorage.removeItem('cartItems');
+            updateCheckoutDisplay(); // Update checkout display
+        }
+
+        // Call to display items when the page loads
+        updateCheckoutDisplay();
+
+        // Add event listener for place order button
+        document.getElementById('place-order-button').addEventListener('click', confirmOrder);
+    </script>
+</body>
+</html>
+
+
+

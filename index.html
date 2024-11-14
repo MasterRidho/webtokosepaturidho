@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar with Image Slider and Product Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <div class="text-3xl font-bold text-gray-800">ZALORE</div>
+            <div class="hidden md:flex space-x-4">
+                <a class="nav-link text-gray-800" href="#">WANITA</a>
+                <a class="nav-link text-gray-800" href="#">PRIA</a>
+                <a class="nav-link text-gray-800" href="#">SPORTS</a>
+                <a class="nav-link text-gray-800" href="#">ANAK</a>
+                <a class="nav-link text-gray-800" href="#">LUXURY</a>
+                <a class="nav-link text-gray-800" href="#">BEAUTY</a>
+                <a class="nav-link text-gray-800" href="#">HOME &amp; LIFESTYLE</a>
+            </div>
+            <div class="flex items-center md:hidden">
+                <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="flex space-x-4">
+                <a class="nav-link" href="index2.html" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white">
+            <nav class="flex flex-col space-y-2 py-2 px-6">
+                <a class="nav-link text-gray-800" href="#">WANITA</a>
+                <a class="nav-link text-gray-800" href="#">PRIA</a>
+                <a class="nav-link text-gray-800" href="#">SPORTS</a>
+                <a class="nav-link text-gray-800" href="#">ANAK</a>
+                <a class="nav-link text-gray-800" href="#">LUXURY</a>
+                <a class="nav-link text-gray-800" href="#">BEAUTY</a>
+                <a class="nav-link text-gray-800" href="#">HOME &amp; LIFESTYLE</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mx-auto mt-4 px-6">
+        <div class="relative">
+            <img id="promotional-image" alt="Promotional" class="w-full rounded-lg" src="https://storage.googleapis.com/a1aa/image/h5MG39U1i8KFNppgpUqVzdA301g4SP9NXpCtrKYKRK3CXl5E.jpg" />
+            <div class="absolute top-1/2 left-4 transform -translate-y-1/2 slider-button" onclick="changeImage('prev')">
+                <i class="fas fa-chevron-left text-white text-2xl"></i>
+            </div>
+            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 slider-button" onclick="changeImage('next')">
+                <i class="fas fa-chevron-right text-white text-2xl"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto mt-8 px-6">
+        <h2 class="text-2xl font-bold mb-4">Product Gallery</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Product Card Template -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden product-card">
+                <img class="w-full h-32 object-cover" src="a1.jpg" alt="Product 1">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">SEPATU NIKE</h3>
+                    <p class="text-gray-700"></p>
+                    <p class="text-xl font-semibold mt-2">RP 50.000</p>
+                    <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition add-to-cart" data-name="SEPATU NIKE" data-price="50000">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden product-card">
+                <img class="w-full h-32 object-cover" src="a2.jpg" alt="Product 2">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">SEPATU SNEKERS WANITA</h3>
+                    <p class="text-gray-700"></p>
+                    <p class="text-xl font-semibold mt-2">RP 150.000</p>
+                    <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition add-to-cart" data-name="SEPATU SNEKERS WANITA" data-price="150000">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden product-card">
+                <img class="w-full h-32 object-cover" src="a3.jpg" alt="Product 3">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">SEPATU OLAH RAGA</h3>
+                    <p class="text-gray-700"></p>
+                    <p class="text-xl font-semibold mt-2">RP 200.000</p>
+                    <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition add-to-cart" data-name="SEPATU OLAH RAGA" data-price="200000">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden product-card">
+                <img class="w-full h-32 object-cover" src="a4.jpg" alt="Product 4">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">SEPATU PANTOPEL</h3>
+                    <p class="text-gray-700"></p>
+                    <p class="text-xl font-semibold mt-2">RP 350.000</p>
+                    <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition add-to-cart" data-name="SEPATU PANTOPEL" data-price="350000">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>;
+        </div>
+    </div>
+
+    <div class="container mx-auto mt-8 px-6" id="cart-container">
+        <h2 class="text-2xl font-bold mb-4" id="cart">Your Shopping Cart</h2>
+        <div id="cart-items" class="bg-white rounded-lg shadow-md p-6">
+            <div class="grid grid-cols-1 gap-4" id="cart-list"></div>
+            <div class="mt-6">
+                <h3 class="text-xl font-bold" id="total">Total: RP 0.00</h3>
+                <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition" id="checkout-button" disabled>
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Image carousel functionality
+const images = [
+    "https://storage.googleapis.com/a1aa/image/h5MG39U1i8KFNppgpUqVzdA301g4SP9NXpCtrKYKRK3CXl5E.jpg",
+    "https://via.placeholder.com/800x400?text=Image+2",
+    "https://via.placeholder.com/800x400?text=Image+3"
+];
+
+let currentImageIndex = 0;
+
+function changeImage(direction) {
+    if (direction === 'next') {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+    } else {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    }
+    document.getElementById('promotional-image').src = images[currentImageIndex];
+}
+
+// Add to cart functionality
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', () => {
+        const productName = button.getAttribute('data-name');
+        const productPrice = parseFloat(button.getAttribute('data-price'));
+
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const existingItem = cartItems.find(item => item.name === productName);
+
+        if (existingItem) {
+            existingItem.quantity += 1; // Increase quantity if item exists
+        } else {
+            cartItems.push({ name: productName, price: productPrice, quantity: 1 }); // Add new item
+        }
+
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartDisplay();
+    });
+});
+
+// Update cart display function
+function updateCartDisplay() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const cartList = document.getElementById('cart-list');
+    const totalElement = document.getElementById('total');
+    const checkoutButton = document.getElementById('checkout-button');
+
+    cartList.innerHTML = '';
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const itemTotalPrice = item.price * item.quantity; // Total price for this item
+        const cartItem = document.createElement('div');
+        cartItem.className = 'flex justify-between items-center p-2 border-b';
+        cartItem.innerHTML = `<span>${item.name} (x${item.quantity})</span><span>RP ${itemTotalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>`;
+        cartList.appendChild(cartItem);
+        total += itemTotalPrice;
+    });
+
+    totalElement.textContent = `Total: RP ${total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+    checkoutButton.disabled = cartItems.length === 0;
+}
+
+// Toggle menu functionality
+document.getElementById('menu-toggle').addEventListener('click', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Add event listener for checkout button
+document.getElementById('checkout-button').addEventListener('click', function() {
+    window.location.href = 'index2.html.html';
+});
+
+// Initial display update
+updateCartDisplay();
+
+    </script>
+</body>
+</html>
